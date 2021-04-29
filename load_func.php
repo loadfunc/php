@@ -1,6 +1,6 @@
 <?php
 
-// https://letfunc.github.io/php/
+// https://loadfunc.github.io/php/load_func.php
 
 function load_func(array $func_url_array, $callback)
 {
@@ -41,6 +41,7 @@ function load_func(array $func_url_array, $callback)
 }
 
 /**
+ * https://loadfunc.github.io/php/load_func.php
  * Class LetJson
  */
 class LoadFunc
