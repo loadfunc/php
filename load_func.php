@@ -8,7 +8,6 @@ function load_func(array $func_url_array, $callback)
     foreach ($func_url_array as $func_url) {
 
         $file_name = basename($func_url);
-//        var_dump($func_name);
         $path = $local_path . $file_name;
 
         // download if not exist
@@ -19,7 +18,7 @@ function load_func(array $func_url_array, $callback)
                 throw new Exception("File not opened");
             }
 
-            echo "::url: ". $func_url;
+//            echo "::url: ". $func_url;
 
             $ch = curl_init();
 
