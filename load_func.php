@@ -19,6 +19,8 @@ function load_func(array $func_url_array, $callback)
                 throw new Exception("File not opened");
             }
 
+            echo "::url: ". $func_url;
+
             $ch = curl_init();
 
             curl_setopt($ch, CURLOPT_FILE, $out);
@@ -28,7 +30,7 @@ function load_func(array $func_url_array, $callback)
             curl_exec($ch);
 
             if (!empty(curl_error($ch))) {
-                throw new Exception("Error is : " . curl_error($ch));
+                throw new Exception("Error for url: ". $func_url . " : " . curl_error($ch));
             }
 
             curl_close($ch);
@@ -72,6 +74,7 @@ class LoadFunc
 
     /**
      * @return array
+     * @throws Exception
      */
     public function exec()
     {
