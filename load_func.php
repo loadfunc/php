@@ -6,18 +6,17 @@ function load_func(array $func_url_array, $callback)
 {
     $local_path = '';
     foreach ($func_url_array as $func_url) {
+
         $file_name = basename($func_url);
 //        var_dump($func_name);
         $path = $local_path . $file_name;
-        //    var_dump(!file_exists($path));
-        //    die;
 
         // download if not exist
         if (!file_exists($path)) {
+
             $out = fopen($path, "wb");
             if ($out == FALSE) {
-                print "File not opened<br>";
-                exit;
+                throw new Exception("File not opened");
             }
 
             $ch = curl_init();
@@ -27,12 +26,21 @@ function load_func(array $func_url_array, $callback)
             curl_setopt($ch, CURLOPT_URL, $func_url);
 
             curl_exec($ch);
-            echo "<br>Error is : " . curl_error($ch);
+
+            if (!empty(curl_error($ch))) {
+                throw new Exception("Error is : " . curl_error($ch));
+            }
 
             curl_close($ch);
             //fclose($handle);
         }
+
         //    if(!@include($path)) throw new Exception("Failed to include 'script.php'");
+
+        if (!file_exists($path)) {
+            throw new Exception("File: " . $path . " not exist");
+        }
+
         // include
         include_once($path);
     }
@@ -54,17 +62,17 @@ class LoadFunc
 
 
     /**
-     * LetPhp constructor.
-     * @param string $url
-     * @param $func_name
-     * @param $func_args
+     * LoadFunc constructor.
+     * @param array $func_url_array
      */
     public function __construct(array $func_url_array)
     {
         $this->func_url_array = $func_url_array;
     }
 
-
+    /**
+     * @return array
+     */
     public function exec()
     {
         $local_path = '';
@@ -72,15 +80,13 @@ class LoadFunc
             $file_name = basename($func_url);
 //        var_dump($func_name);
             $path = $local_path . $file_name;
-            //    var_dump(!file_exists($path));
-            //    die;
 
             // download if not exist
             if (!file_exists($path)) {
+
                 $out = fopen($path, "wb");
                 if ($out == FALSE) {
-                    print "File not opened<br>";
-                    exit;
+                    throw new Exception("File not opened");
                 }
 
                 $ch = curl_init();
@@ -90,12 +96,21 @@ class LoadFunc
                 curl_setopt($ch, CURLOPT_URL, $func_url);
 
                 curl_exec($ch);
-                echo "<br>Error is : " . curl_error($ch);
+
+                if (!empty(curl_error($ch))) {
+                    throw new Exception("Error is : " . curl_error($ch));
+                }
 
                 curl_close($ch);
                 //fclose($handle);
             }
+
             //    if(!@include($path)) throw new Exception("Failed to include 'script.php'");
+
+            if (!file_exists($path)) {
+                throw new Exception("File: " . $path . " not exist");
+            }
+
             // include
             include_once($path);
         }
