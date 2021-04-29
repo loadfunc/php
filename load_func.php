@@ -1,7 +1,15 @@
 <?php
 
 // https://loadfunc.github.io/php/load_func.php
+// curl https://loadfunc.github.io/php/load_func.php --output load_func.php
 
+/**
+ * @param array $func_url_array
+ * @param $callback
+ * @return mixed
+ *
+ * @throws Exception
+ */
 function load_func(array $func_url_array, $callback)
 {
     $local_path = '';
@@ -51,6 +59,7 @@ function load_func(array $func_url_array, $callback)
 
 /**
  * https://loadfunc.github.io/php/load_func.php
+ *
  * Class LetJson
  */
 class LoadFunc
