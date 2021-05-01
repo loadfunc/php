@@ -20,6 +20,7 @@ function load_func(array $func_url_array, $callback, $local_path = '.load_func')
 
         // IF exist in current folder
         if (file_exists($file_name)) {
+            include_once($file_name);
             continue;
         }
 
