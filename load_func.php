@@ -16,8 +16,14 @@ function load_func(array $func_url_array, $callback, $local_path = '.load_func')
     /** @var string $func_url */
     foreach ($func_url_array as $func_url) {
 
-        // PATH
         $file_name = basename($func_url);
+
+        // IF exist in current folder
+        if (file_exists($file_name)) {
+            continue;
+        }
+
+        // If exist PATH
         if (!empty($local_path)) {
             if (!file_exists($local_path)) {
                 if (!mkdir($local_path) && !is_dir($local_path)) {
