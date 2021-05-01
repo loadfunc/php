@@ -3,26 +3,10 @@
 // https://loadfunc.github.io/php/load_func.php
 // curl https://loadfunc.github.io/php/load_func.php --output load_func.php
 
-function url_exists($url)
-{
-//    if (isValidUrl($url)) {
-//        return true;
-//    }
-    if (curl_init($url) === false) {
-        return false;
-    }
-
-    $headers = @get_headers($url);
-    if (strpos($headers[0], '200') === false) {
-        return false;
-    }
-
-    return true;
-}
-
 /**
  * @param array $func_url_array
  * @param $callback
+ * @param string $local_path
  * @return mixed
  *
  * @throws Exception
@@ -187,6 +171,23 @@ class LoadFunc
     }
 }
 
+
+function url_exists($url)
+{
+//    if (isValidUrl($url)) {
+//        return true;
+//    }
+    if (curl_init($url) === false) {
+        return false;
+    }
+
+    $headers = @get_headers($url);
+    if (strpos($headers[0], '200') === false) {
+        return false;
+    }
+
+    return true;
+}
 
 function isValidUrl($url)
 {
